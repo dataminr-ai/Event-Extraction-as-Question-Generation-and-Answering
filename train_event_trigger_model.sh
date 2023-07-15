@@ -1,1 +1,1 @@
-python src/train_trigger_detectionl.py --gpu 0 --correct_bias
+python src/train_trigger_detection.py --gpu 0 --correct_bias
