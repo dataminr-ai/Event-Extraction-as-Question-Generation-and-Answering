@@ -292,10 +292,10 @@ if __name__ == "__main__":
                             f"Step: {step + 1} / {len(train_dataset_loader)}, "
                             f"used_time = {time.time() - start_time:.2f}s, "
                             f"loss = {total_loss / total_steps:.6f}, "
-                            f"dev rouge score = {dev_result['rouge']:.2f}, "
-                            f"dev bleu score = {dev_result['bleu']:.2f}, "
-                            f"test rouge score = {test_result['rouge']:.2f}, "
-                            f"test bleu score = {test_result['bleu']:.2f}")
+                            f"dev rouge score = {dev_result['rouge']:.3f}, "
+                            f"dev bleu score = {dev_result['bleu']:.3f}, "
+                            f"test rouge score = {test_result['rouge']:.3f}, "
+                            f"test bleu score = {test_result['bleu']:.3f}")
 
                     if save_model:
                         model_to_save = model.module if hasattr(
