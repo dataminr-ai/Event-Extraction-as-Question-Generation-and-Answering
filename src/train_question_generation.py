@@ -8,6 +8,7 @@ import logging
 
 import torch
 import torch.nn as nn
+import transformers
 from transformers import T5ForConditionalGeneration, T5Tokenizer, T5Config, \
     BartTokenizer, BartForConditionalGeneration, BartConfig, \
     AdamW, get_linear_schedule_with_warmup, Adafactor
@@ -106,6 +107,7 @@ if __name__ == "__main__":
         help="set the correct_bias of the optimizer as True when add argument",
     )
     args = parser.parse_args()
+    transformers.logging.set_verbosity_error()
 
     if args.seed is not None:
         loader.set_seed(args.seed)
