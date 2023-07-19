@@ -80,7 +80,7 @@ if __name__ == "__main__":
     parser.add_argument("--batch_size", type=int, default=16,
                         help="batch size")
     parser.add_argument(
-        "--models_dir", default="./pretrained_model",
+        "--models_dir", default="./model_checkpoint/eae_model",
         help="directory of checkpoint"
     )
     parser.add_argument(
