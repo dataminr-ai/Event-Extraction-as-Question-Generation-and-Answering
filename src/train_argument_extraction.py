@@ -147,8 +147,6 @@ if __name__ == "__main__":
         help="name of the transformer backbone",
     )
     parser.add_argument("--run_id", default="", help="name of the dataset")
-    parser.add_argument("--qg_model_type", default="t5",
-                        help="name of the dataset")
     parser.add_argument(
         "--qg_length_penalty", default=0.0, type=float,
         help="name of the dataset"

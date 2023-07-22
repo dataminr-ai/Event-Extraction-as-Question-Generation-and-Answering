@@ -38,7 +38,8 @@ class AceExample(object):
     A single training/test example for the ace dataset.
     """
 
-    def __init__(self, sentence, events, s_start, tokens, trigger_label, char_offset):
+    def __init__(self, sentence, events, s_start, tokens, trigger_label,
+                 char_offset):
         self.sentence = sentence
         self.events = events
         self.s_start = s_start
@@ -55,7 +56,8 @@ class AceExample(object):
         event_triggers = []
         for event in self.events:
             if event:
-                event_triggers.append(self.sentence[event[0][0] - self.s_start])
+                event_triggers.append(
+                    self.sentence[event[0][0] - self.s_start])
                 event_triggers.append(event[0][1])
                 event_triggers.append(str(event[0][0] - self.s_start))
                 event_triggers.append("|")
@@ -67,15 +69,15 @@ class InputFeatures_trigger(object):
     """A single set of features of data."""
 
     def __init__(
-        self,
-        example_id,
-        tokens,
-        input_ids,
-        segment_ids,
-        mask_ids,
-        labels,
-        trigger_masks,
-        sub_type,
+            self,
+            example_id,
+            tokens,
+            input_ids,
+            segment_ids,
+            mask_ids,
+            labels,
+            trigger_masks,
+            sub_type,
     ):
         self.example_id = example_id
         self.tokens = tokens
@@ -91,17 +93,17 @@ class InputFeatures_arg_t5(object):
     """A single set of features of data."""
 
     def __init__(
-        self,
-        example_id,
-        input_ids,
-        input_mask,
-        #
-        event_type,
-        argument_type,
-        fea_trigger_offset,
-        #
-        target_ids,
-        target_attention_mask,
+            self,
+            example_id,
+            input_ids,
+            input_mask,
+            #
+            event_type,
+            argument_type,
+            fea_trigger_offset,
+            #
+            target_ids,
+            target_attention_mask,
     ):
         self.example_id = example_id
         self.input_ids = input_ids
@@ -148,7 +150,7 @@ def load_template_t5(input_doc):
 
             arg_role = row[2]
             data_dic[main_type][sub_type]["role"][arg_role] = (
-                len(data_dic[main_type][sub_type]["role"]) + 1
+                    len(data_dic[main_type][sub_type]["role"]) + 1
             )
             data_dic[main_type][sub_type]["role_re"][
                 data_dic[main_type][sub_type]["role"][arg_role]
@@ -171,7 +173,8 @@ def load_template_t5(input_doc):
             data_dic[main_type][sub_type]["question"][arg_role] = {}
             one_question = row[3].strip()
 
-            data_dic[main_type][sub_type]["question"][arg_role]["0"] = [one_question]
+            data_dic[main_type][sub_type]["question"][arg_role]["0"] = [
+                one_question]
             data_dic[main_type][sub_type]["question"][arg_role]["0"].append(
                 one_question[:-1] + " in [trigger]?"
             )
@@ -240,7 +243,7 @@ def load_sentences(path):
 
 
 def convert_examples_to_features_sequence(
-    examples, tokenizer, category_to_index, lower_case=False
+        examples, tokenizer, category_to_index, lower_case=False
 ):
     features = []
     all_input_ids = []
@@ -494,7 +497,7 @@ def my_collate_qg_train_bart(batch):
 
 
 def convert_examples_to_features_qg(
-    examples, tokenizer, query_templates, lower_case=False
+        examples, tokenizer, query_templates, lower_case=False
 ):
     all_input_ids = []
     all_target_ids = []
@@ -516,7 +519,8 @@ def convert_examples_to_features_qg(
                 base_query = query_templates[main_event_type][sub_event_type][
                     "question"
                 ][target_argument_type]["0"][0]
-                role_mapping = query_templates[main_event_type][sub_event_type]["role"]
+                role_mapping = \
+                    query_templates[main_event_type][sub_event_type]["role"]
 
                 query_dic["0"] = [base_query]
 
@@ -532,8 +536,8 @@ def convert_examples_to_features_qg(
                     # in ACE 2005 event guideline, Contact.Phone-Write
                     # should not have Place argument
                     if (
-                        event_type == "Contact.Phone-Write"
-                        and normalized_argument_type == "Place"
+                            event_type == "Contact.Phone-Write"
+                            and normalized_argument_type == "Place"
                     ):
                         continue
 
@@ -553,8 +557,8 @@ def convert_examples_to_features_qg(
                         raw_argument_type, event_type
                     )
                     if (
-                        event_type == "Contact.Phone-Write"
-                        and normalized_argument_type == "Place"
+                            event_type == "Contact.Phone-Write"
+                            and normalized_argument_type == "Place"
                     ):
                         continue
 
@@ -702,14 +706,15 @@ def convert_examples_to_features_qg(
                     target_ids = target_encodings["input_ids"]
 
                     assert (
-                        example.sentence[event[0][0] : event[0][1] + 1] == trigger_token
+                            example.sentence[
+                            event[0][0]: event[0][1] + 1] == trigger_token
                     )
                     question_context = (
-                        example.sentence[: event[0][0]]
-                        + "* "
-                        + trigger_token
-                        + " *"
-                        + example.sentence[event[0][1] + 1 :]
+                            example.sentence[: event[0][0]]
+                            + "* "
+                            + trigger_token
+                            + " *"
+                            + example.sentence[event[0][1] + 1:]
                     )
                     input_text = "role: %s context: %s </s>" % (
                         target_argument_type.lower(),
@@ -735,18 +740,18 @@ def convert_examples_to_features_qg(
 
 
 def template_fill_in(
-    arguments,
-    start_idx,
-    num_role,
-    event_type,
-    other_role_set,
-    found_other_arg_list,
-    found_other_role_list,
-    role_mapping,
-    query_templates,
-    target_argument_type,
-    query_dic,
-    threshold_arg,
+        arguments,
+        start_idx,
+        num_role,
+        event_type,
+        other_role_set,
+        found_other_arg_list,
+        found_other_role_list,
+        role_mapping,
+        query_templates,
+        target_argument_type,
+        query_dic,
+        threshold_arg,
 ):
     for sub_idx in range(start_idx + 1, len(arguments)):
         cur_argument = arguments[sub_idx]
@@ -764,7 +769,8 @@ def template_fill_in(
             continue
         else:
             found_other_arg_list.append(cur_argument)
-            found_other_role_list.append(role_mapping[normalized_argument_role])
+            found_other_role_list.append(
+                role_mapping[normalized_argument_role])
 
         if num_role - 1 > 0:
             found_other_arg_list, found_other_role_list, query_dic = template_fill_in(
@@ -789,8 +795,10 @@ def template_fill_in(
                 role_mapping[x[2]] for x in found_other_arg_list
             ]
             found_other_arg_index_list.sort(key=lambda x: x)
-            found_other_arg_index_list = [str(x) for x in found_other_arg_index_list]
-            query = query_templates[event_type.split(".")[0]][event_type.split(".")[1]][
+            found_other_arg_index_list = [str(x) for x in
+                                          found_other_arg_index_list]
+            query = query_templates[event_type.split(".")[0]][
+                event_type.split(".")[1]][
                 "question"
             ][target_argument_type]["_".join(found_other_arg_index_list)][0]
 
@@ -804,21 +812,21 @@ def template_fill_in(
 
 
 def convert_examples_to_features_qa(
-    examples,
-    tokenizer,
-    query_templates,
-    nth_query,
-    is_training=True,
-    multi_arg=False,
-    qg_model=None,
-    na_format="empty",
-    # num_question=1,
-    qg_tokenizer=None,
-    transformer_name="t5-large",
-    qg_length_penalty=1.0,
-    lower_case=False,
-    qa_inf_batch_size=16,
-    qg_num_beams=4,
+        examples,
+        tokenizer,
+        query_templates,
+        nth_query,
+        is_training=True,
+        multi_arg=False,
+        qg_model=None,
+        na_format="empty",
+        # num_question=1,
+        qg_tokenizer=None,
+        transformer_name="t5-large",
+        qg_length_penalty=1.0,
+        lower_case=False,
+        qa_inf_batch_size=16,
+        qg_num_beams=4,
 ):
     all_input_ids = []
     all_target_ids = []
@@ -852,7 +860,8 @@ def convert_examples_to_features_qa(
                     "question"
                 ][target_argument_type]["0"][nth_query]
 
-                role_mapping = query_templates[main_event_type][sub_event_type]["role"]
+                role_mapping = \
+                    query_templates[main_event_type][sub_event_type]["role"]
 
                 query_dic["0"] = [base_query]
 
@@ -868,8 +877,8 @@ def convert_examples_to_features_qa(
                     # in ACE 2005 event guideline, Contact.Phone-Write
                     # should not have Place argument
                     if (
-                        event_type == "Contact.Phone-Write"
-                        and normalized_argument_type == "Place"
+                            event_type == "Contact.Phone-Write"
+                            and normalized_argument_type == "Place"
                     ):
                         continue
 
@@ -889,8 +898,8 @@ def convert_examples_to_features_qa(
                     )
 
                     if (
-                        event_type == "Contact.Phone-Write"
-                        and normalized_argument_type == "Place"
+                            event_type == "Contact.Phone-Write"
+                            and normalized_argument_type == "Place"
                     ):
                         continue
 
@@ -900,7 +909,8 @@ def convert_examples_to_features_qa(
 
                         answer_start, answer_end = argument[0], argument[1]
                         answer_str = argument[3]
-                        answer_list.append([answer_start, answer_end, answer_str])
+                        answer_list.append(
+                            [answer_start, answer_end, answer_str])
 
                 query_dic = generate_questions_with_contextual_args(
                     query_dic,
@@ -937,8 +947,9 @@ def convert_examples_to_features_qa(
                         for one_query in query_dic[query_index]:
                             # append the query with trigger information
                             input_text = (
-                                "question: %s in * %s * event? context: %s </s>"
-                                % (one_query[:-1], trigger_token, example.sentence)
+                                    "question: %s in * %s * event? context: %s </s>"
+                                    % (one_query[:-1], trigger_token,
+                                       example.sentence)
                             )
                             if lower_case:
                                 input_text = input_text.lower()
@@ -967,14 +978,15 @@ def convert_examples_to_features_qa(
 
                 else:
                     assert (
-                        example.sentence[event[0][0] : event[0][1] + 1] == trigger_token
+                            example.sentence[
+                            event[0][0]: event[0][1] + 1] == trigger_token
                     )
                     question_context = (
-                        example.sentence[: event[0][0]]
-                        + "* "
-                        + trigger_token
-                        + " *"
-                        + example.sentence[event[0][1] + 1 :]
+                            example.sentence[: event[0][0]]
+                            + "* "
+                            + trigger_token
+                            + " *"
+                            + example.sentence[event[0][1] + 1:]
                     )
                     query_input_text = "role: %s context: %s </s>" % (
                         target_argument_type.lower(),
@@ -982,7 +994,8 @@ def convert_examples_to_features_qa(
                     )
                     if lower_case:
                         query_input_text = query_input_text.lower()
-                    query_input_encodings = qg_tokenizer.encode_plus(query_input_text)
+                    query_input_encodings = qg_tokenizer.encode_plus(
+                        query_input_text)
                     query_input_ids = query_input_encodings["input_ids"]
                     query_input_mask = query_input_encodings["attention_mask"]
 
@@ -1059,7 +1072,8 @@ def convert_examples_to_features_qa(
             cur_feature = all_features[example_index]
 
             # for index_return in range(num_question):
-            pre_answer = qg_tokenizer.decode(outputs[i], skip_special_tokens=True)
+            pre_answer = qg_tokenizer.decode(outputs[i],
+                                             skip_special_tokens=True)
             # pre_answer = qg_tokenizer.decode(
             #     outputs[i * num_question + index_return],
             #     skip_special_tokens=True)
@@ -1230,14 +1244,14 @@ def my_collate_qa_inference_bart(batch):
 
 
 def generate_questions_with_contextual_args(
-    query_dic,
-    num_args,
-    role_mapping,
-    target_argument_type,
-    arguments,
-    event_type,
-    other_role_set,
-    query_templates,
+        query_dic,
+        num_args,
+        role_mapping,
+        target_argument_type,
+        arguments,
+        event_type,
+        other_role_set,
+        query_templates,
 ):
     if num_args >= 1:
         threshold_arg = 1
