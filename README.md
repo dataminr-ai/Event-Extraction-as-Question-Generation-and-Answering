@@ -16,7 +16,9 @@ Please refer to ```./data_process/README.md``` for details.
 
 The code is based on Python 3.8+, and the scores reported are based on
 experiments on a single AWS p3.2xlarge instance.
+
 To install the required dependencies:
+
 `pip install -r requirements.txt`
 
 ## Code
@@ -30,11 +32,13 @@ To install the required dependencies:
 #### Question Generation
 
 `bash ./train_qg_bart.sh` for the BART backbone.
+
 `bash ./train_qg_t5.sh` for the T5 backbone.
 
 #### Argument Extraction
 
 `bash ./train_argument_extraction_bart.sh` for the BART backbone.
+
 `bash ./train_argument_extraction_t5.sh` for the T5 backbone.
 
 ## Citation:
