@@ -5,5 +5,5 @@ paper [Event Extraction as Question Generation and Answering]
 (https://aclanthology.org/2023.acl-short.143/).
 
 <p align='center'>
-  <img src='figures/qga-ee.jpg' width="800px">
+  <img src='figures/qga-ee.jpg' width="200px">
 </p>
