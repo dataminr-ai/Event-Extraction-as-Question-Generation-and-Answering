@@ -28,32 +28,32 @@ To install the required dependencies:
 
 #### Train the Trigger Detection Model.
 
+`bash ./train_event_trigger_model.sh`
+
 The trained model will be saved in `./model_checkpoint/trigger_model` by
 default.
 
-`bash ./train_event_trigger_model.sh`
-
 #### Train the Question Generation Models.
-
-The trained model will be saved in `./model_checkpoint/qg_model_bart`
-or `./model_checkpoint/qg_model_t5` for BART and T5 backbone respectively by
-default.
 
 `bash ./train_qg_bart.sh` for the BART backbone.
 
 `bash ./train_qg_t5.sh` for the T5 backbone.
 
-#### Train Argument Extraction Models and Evaluate with Gold Event Triggers
-
-The trained model will be saved in `./model_checkpoint/eae_model_bart`
-or `./model_checkpoint/eae_model_t5` for BART and T5 backbone respectively by
+The trained model will be saved in `./model_checkpoint/qg_model_bart`
+or `./model_checkpoint/qg_model_t5` for BART and T5 backbone respectively by
 default.
+
+#### Train Argument Extraction Models and Evaluate with Gold Event Triggers
 
 `bash ./train_argument_extraction_bart.sh` for the BART backbone.
 
 `bash ./train_argument_extraction_t5.sh` for the T5 backbone.
 
-#### Evaluate Argument Extraction Evaluation models with System Predicted Event Triggers
+The trained model will be saved in `./model_checkpoint/eae_model_bart`
+or `./model_checkpoint/eae_model_t5` for BART and T5 backbone respectively by
+default.
+
+#### Evaluate Argument Extraction models with System Predicted Event Triggers
 
 `bash evaluate_e2e_predicted_triggers_bart.sh` for the BART backbone.
 
