@@ -36,11 +36,17 @@ To install the required dependencies:
 
 `bash ./train_qg_t5.sh` for the T5 backbone.
 
-#### Argument Extraction
+#### Argument Extraction with Gold Event Triggers
 
 `bash ./train_argument_extraction_bart.sh` for the BART backbone.
 
 `bash ./train_argument_extraction_t5.sh` for the T5 backbone.
+
+#### Argument Extraction Evaluation with System Predicted Event Triggers
+
+`bash evaluate_e2e_predicted_triggers_bart.sh` for the BART backbone.
+
+`bash evaluate_e2e_predicted_triggers_t5.sh` for the T5 backbone.
 
 ## Citation:
 
@@ -49,16 +55,16 @@ cite [our paper](https://aclanthology.org/2023.acl-short.143/):
 
 ```bibtex
 @inproceedings{lu-etal-2023-event,
-title = "Event Extraction as Question Generation and Answering",
-author = "Lu, Di  and
-Ran, Shihao  and
-Tetreault, Joel  and
-Jaimes, Alejandro",
-booktitle = "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)",
-month = jul,
-year = "2023",
-address = "Toronto, Canada",
-publisher = "Association for Computational Linguistics",
-url = "https://aclanthology.org/2023.acl-short.143",
+    title = "Event Extraction as Question Generation and Answering",
+    author = "Lu, Di  and
+    Ran, Shihao  and
+    Tetreault, Joel  and
+    Jaimes, Alejandro",
+    booktitle = "Proceedings of the 61st Annual Meeting of the Association for Computational Linguistics (Volume 2: Short Papers)",
+    month = jul,
+    year = "2023",
+    address = "Toronto, Canada",
+    publisher = "Association for Computational Linguistics",
+    url = "https://aclanthology.org/2023.acl-short.143",
 }
 ```
