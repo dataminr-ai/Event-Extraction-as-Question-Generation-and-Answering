@@ -207,7 +207,7 @@ if __name__ == "__main__":
     global_step = 0
     start_time = time.time()
     best_result = None
-    
+
     test_result, test_preds = evaluate_qa(
         args,
         eae_tokenizer,
@@ -219,4 +219,12 @@ if __name__ == "__main__":
         multi_arg=args.multi_arg,
         qa_length_penalty=args.qa_length_penalty,
         lower_case=args.lower_case,
+    )
+    logger.info(
+        f"test: p_c: {test_result['prec_c']:.2f}, "
+        f"r_c: {test_result['recall_c']:.2f}, "
+        f"f1_c: {test_result['f1_c']:.2f}, "
+        f"p_i: {test_result['prec_i']:.2f}, "
+        f"r_i: {test_result['recall_i']:.2f}, "
+        f"f1_i: {test_result['f1_i']:.2f}"
     )
