@@ -33,19 +33,27 @@ default.
 
 `bash ./train_event_trigger_model.sh`
 
-#### Question Generation
+#### Train the Question Generation Models.
+
+The trained model will be saved in `./model_checkpoint/qg_model_bart`
+or `./model_checkpoint/qg_model_t5` for BART and T5 backbone respectively by
+default.
 
 `bash ./train_qg_bart.sh` for the BART backbone.
 
 `bash ./train_qg_t5.sh` for the T5 backbone.
 
-#### Argument Extraction with Gold Event Triggers
+#### Train Argument Extraction Models and Evaluate with Gold Event Triggers
+
+The trained model will be saved in `./model_checkpoint/eae_model_bart`
+or `./model_checkpoint/eae_model_t5` for BART and T5 backbone respectively by
+default.
 
 `bash ./train_argument_extraction_bart.sh` for the BART backbone.
 
 `bash ./train_argument_extraction_t5.sh` for the T5 backbone.
 
-#### Argument Extraction Evaluation with System Predicted Event Triggers
+#### Evaluate Argument Extraction Evaluation models with System Predicted Event Triggers
 
 `bash evaluate_e2e_predicted_triggers_bart.sh` for the BART backbone.
 
