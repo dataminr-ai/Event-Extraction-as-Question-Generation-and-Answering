@@ -26,7 +26,7 @@ To install the required dependencies:
 
 ### Train and eval models
 
-#### Trigger Detection
+#### Train the Trigger Detection Model. The trained model will be saved in `./model_checkpoint/trigger_model` by default.
 
 `bash ./train_event_trigger_model.sh`
 
