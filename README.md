@@ -11,6 +11,9 @@ paper [Event Extraction as Question Generation and Answering](https://aclantholo
 
 ## ACE data preprocessing
 
+We adapted the preprocessing scripts from
+the [Dygiepp repo](https://github.com/dwadden/dygiepp). The main difference is
+that we retrieve the character offsets of the annotations as well as sentences.
 Please refer to ```./data_process/README.md``` for details.
 
 ## Requirement
